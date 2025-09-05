@@ -1,0 +1,239 @@
+<!--
+README — Deploy this static homepage to GitHub Pages (step-by-step)
+
+Files: This single file (index.html) contains the full static homepage (HTML, CSS, JS).
+
+Option A — (easiest) Deploy using the GitHub web interface (no programming needed)
+1. Create a GitHub account at https://github.com if you don't have one.
+2. Click the + (top-right) → New repository.
+   - Repository name: e.g. my-fashion-store
+   - Visibility: Public
+   - Do NOT initialize with README (optional). Click Create repository.
+3. On the new repo page, click Add file → Upload files.
+4. Drag & drop this file (index.html) OR copy-paste its content using Add file → Create new file and paste.
+   - Commit changes (leave message "Initial commit").
+5. Go to Settings → Pages (left sidebar or under "Code and automation" → Pages).
+   - Under "Build and deployment" select: Branch: main (or master) and folder: /(root).
+   - Click Save.
+6. After saving, you will see a "Site published at" URL. The public URL will be:
+   https://<your-github-username>.github.io/<repo-name>/
+   - If you name the repo exactly <your-github-username>.github.io then your site will be:
+     https://<your-github-username>.github.io/
+
+Option B — Upload with GitHub Desktop (no terminal knowledge needed)
+1. Install GitHub Desktop (desktop.github.com) and sign in to your GitHub account.
+2. File → New repository → fill name (my-fashion-store) → Create repository.
+3. Copy this index.html into the repository folder on your computer.
+4. In GitHub Desktop you will see the changed file; write commit message "Initial commit" → Commit to main → Push origin.
+5. Then enable Pages as in Option A (Settings → Pages) and choose branch main / folder root.
+
+Option C — Command line (for the few who want it)
+1. Create a repo on GitHub (see Option A step 2).
+2. On your computer, put index.html in a folder, then run:
+
+   git init
+   git add index.html
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/<your-username>/<repo-name>.git
+   git push -u origin main
+
+3. Enable Pages in Settings → Pages and select branch main / root.
+
+Quick troubleshooting tips
+- Make repository public if you want others to see it.
+- Make sure index.html is at the repository root (not inside a sub-folder), and that you picked the right branch when enabling Pages.
+- If you change the file later, just update the file in the repo (upload new file or edit in GitHub UI) and commit — the published site will update automatically.
+
+Custom domain
+- You can use your own domain by adding a CNAME file or configuring the Pages section.
+
+Need help?
+- If you'd like, tell me your GitHub username and I can give the exact URL you'll get (or guide you through each click while you're at the GitHub screen).
+
+----
+Below is the full static homepage (one file). Save it as index.html and upload to GitHub as explained above.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Flashy, colorful clothing shop — demo homepage" />
+  <title>GlowCloset — Fashion that pops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: linear-gradient(135deg,#ff7eb3 0%,#7afcff 50%, #ffd97a 100%);
+      --accent: #ff33cc;
+      --glass: rgba(255,255,255,0.08);
+      --card: rgba(255,255,255,0.06);
+      --text: #0f172a;
+      --muted: rgba(15,23,42,0.65);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Poppins',system-ui,Arial; color:var(--text);background:radial-gradient(circle at 10% 10%, #fff6fb 0%, #f6f9ff 30%, #fff 100%);}
+    a{color:inherit;text-decoration:none}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;position:sticky;top:0;background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.3);z-index:20}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .mark{width:44px;height:44px;border-radius:10px;background:conic-gradient(from 120deg,#ffd97a,#ff7eb3,#7afcff);box-shadow:0 6px 18px rgba(122,252,255,0.12);display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+    nav a{margin-left:18px;font-weight:600;color:var(--muted)}
+    .cta{background:linear-gradient(90deg,#ff7eb3,#7afcff);padding:10px 16px;border-radius:12px;color:#071028;font-weight:700;box-shadow:0 10px 30px rgba(122,252,255,0.14)}
+
+    .hero{display:grid;grid-template-columns:1fr 480px;gap:28px;padding:72px 32px;align-items:center}
+    .hero-left{max-width:740px}
+    h1{font-size:48px;margin:0 0 14px;line-height:1.02;letter-spacing:-0.02em}
+    .eyebrow{display:inline-block;background:linear-gradient(90deg,#ff7eb3,#7afcff);color:white;padding:6px 12px;border-radius:999px;font-weight:700;margin-bottom:18px}
+    p.lead{font-size:18px;color:var(--muted);margin:0 0 22px}
+    .buttons{display:flex;gap:12px}
+    .btn{padding:12px 18px;border-radius:12px;font-weight:700;cursor:pointer;border:0}
+    .btn.primary{background:linear-gradient(90deg,#ff6dbb,#8effff);box-shadow:0 8px 30px rgba(255,107,187,0.15)}
+    .btn.ghost{background:transparent;border:2px solid rgba(15,23,42,0.06)}
+
+    .hero-right{position:relative;height:420px;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#ffd97a22,#ff7eb322)}
+    .hero-right img{width:100%;height:100%;object-fit:cover;transform:scale(1.03);filter:contrast(1.05) saturate(1.05)}
+    .neon{position:absolute;left:20px;bottom:16px;background:linear-gradient(90deg,#ff7eb3,#7afcff);padding:10px 16px;border-radius:999px;color:#071028;font-weight:800;box-shadow:0 10px 30px rgba(122,252,255,0.08)}
+
+    /* categories */
+    .categories{display:flex;gap:12px;padding:20px 32px 12px}
+    .cat{flex:1;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.28));border:1px solid rgba(255,255,255,0.5);display:flex;align-items:center;gap:12px}
+    .cat img{width:84px;height:84px;border-radius:12px;object-fit:cover}
+
+    /* products */
+    .products{padding:24px 32px 72px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(0,0,0,0.02));padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(4px);transition:transform .22s ease,box-shadow .22s ease}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(0,0,0,0.08)}
+    .product-img{width:100%;height:220px;border-radius:12px;overflow:hidden}
+    .product-img img{width:100%;height:100%;object-fit:cover}
+    .product-title{font-weight:700;margin:12px 0 6px}
+    .price{font-weight:800}
+    .meta{color:var(--muted);font-size:13px}
+    .add{margin-top:12px;padding:10px 12px;border-radius:10px;border:0;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#8effff,#ffd97a)}
+
+    footer{padding:28px 32px;background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.9));border-top:1px solid rgba(255,255,255,0.6);margin-top:40px}
+    .foot-grid{display:flex;justify-content:space-between;align-items:center}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* small screens */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;gap:16px;padding:40px 20px}
+      .hero-right{height:320px}
+    }
+
+    /* subtle animations */
+    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+    .float{animation:floaty 6s ease-in-out infinite}
+
+    /* toast */
+    .toast{position:fixed;right:20px;bottom:20px;background:linear-gradient(90deg,#ff7eb3,#7afcff);padding:12px 16px;border-radius:12px;color:#071028;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.12);display:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="mark">G</div>
+      <div>
+        <div style="font-weight:800">GlowCloset</div>
+        <div style="font-size:12px;color:var(--muted)">Colorful clothing from local designers</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#products">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="cta" href="#products">Shop Now</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <span class="eyebrow">New Drop • Summer Neon</span>
+        <h1>Clothes that pop — made for every city night & sunny day</h1>
+        <p class="lead">A small-batch collection of vibrant streetwear and flowy dresses. Bright colors, bold cuts — easy to wear, hard to ignore.</p>
+        <div class="buttons">
+          <button class="btn primary" onclick="location.href='#products'">Browse Collection</button>
+          <button class="btn ghost" onclick="location.href='#about'">Our Story</button>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:22px">
+          <div style="background:var(--card);padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(90deg,#fff,#fff3);display:flex;align-items:center;justify-content:center;font-weight:800">★</div>
+            <div>
+              <div style="font-weight:700">Free local pickup</div>
+              <div class="meta">Available in Taipei</div>
+            </div>
+          </div>
+          <div style="background:var(--card);padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(90deg,#fff,#fff3);display:flex;align-items:center;justify-content:center;font-weight:800">✓</div>
+            <div>
+              <div style="font-weight:700">Secure checkout</div>
+              <div class="meta">SSL & international payment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right float">
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="hero image">
+        <div class="neon">Limited edition • Shop the drop</div>
+      </div>
+    </section>
+
+    <section class="categories">
+      <div class="cat">
+        <img src="https://images.unsplash.com/photo-1520975914722-62ceb4992bce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=60" alt="category">
+        <div>
+          <div style="font-weight:800">Street Neon</div>
+          <div class="meta">Bold cuts & bright palettes</div>
+        </div>
+      </div>
+      <div class="cat">
+        <img src="https://images.unsplash.com/photo-1520975914722-62ceb4992bce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=60" alt="category">
+        <div>
+          <div style="font-weight:800">Flow Dresses</div>
+          <div class="meta">Light, airy, colorful</div>
+        </div>
+      </div>
+      <div class="cat">
+        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=60" alt="category">
+        <div>
+          <div style="font-weight:800">Essentials</div>
+          <div class="meta">Bright basics with personality</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="products">
+      <h2 style="margin:0 0 18px">Featured Items</h2>
+      <div class="grid">
+
+        <article class="card">
+          <div class="product-img"><img src="https://images.unsplash.com/photo-1520975914722-62ceb4992bce?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="product 1"></div>
+          <div class="product-title">Neon Breeze Jacket</div>
+          <div class="meta">Unisex • limited run</div>
+          <div class="price">NT$2,380</div>
+          <button class="add" onclick="addToCart('Neon Breeze Jacket')">Add to cart</button>
+        </article>
+
+        <article class="card">
+          <div class="product-img"><img src="https://images.unsplash.com/photo-1521334884684-d80222895322?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="product 2"></div>
+          <div class="product-title">Sunburst Slip Dress</div>
+          <div class="meta">One-size • breathable</div>
+          <div class="price">NT$1,980</div>
+          <button class="add" onclick="addToCart('Sunburst Slip Dress')">Add to cart</button>
+        </article>
+
+        <article class="card">
+          <div class="product-img"><img src="https://images.unsplash.com/photo-1503342452485-86f7f7a1f6a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="product 3"></div>
+          <div class="product-title">Glow Tee — Coral</div>
+          <div class="meta">Soft cotton blend</div>
+          <div class="price">NT$720</div>
+          <button class="add" onclick="addToCart('Glow Tee — Coral')">Add to cart</button>
+        </article>
+
+        <article class="card">
